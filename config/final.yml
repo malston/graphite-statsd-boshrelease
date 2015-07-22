@@ -2,6 +2,5 @@
 blobstore:
   provider: s3
   options:
-    bucket_name: graphite-blobstore
-    endpoint: https://s3-eu-west-1.amazonaws.com
+    bucket_name: graphite-statsd-boshrelease
 final_name: graphite
