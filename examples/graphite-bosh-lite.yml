@@ -1,17 +1,10 @@
-<%
-  # Update these properties as required
-  deployment_name  = 'graphite-bosh-lite'
-  director_uuid    = 'bf3dbdbd-50df-4588-8056-b57889d5ddca'
-  stemcell_name    = 'bosh-warden-boshlite-ubuntu-trusty-go_agent'
-  stemcell_version = 'latest'
-%>
-
-name: <%= deployment_name %>
-director_uuid: <%= director_uuid %>
+---
+name: graphite-bosh-lite
+director_uuid: 1814d7a5-6a04-4201-adb1-d6e38cb4fb14
 
 releases:
 - name: graphite
-  version: latest
+  version: 1
 
 jobs:
 - name: graphite
@@ -56,10 +49,10 @@ properties:
       inactivity-timeout: 60
 
 meta:
-  environment: <%= deployment_name %>
+  environment: graphite-bosh-lite
   stemcell:
-    name: <%= stemcell_name %>
-    version: <%= stemcell_version %>
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
 
 resource_pools:
 - cloud_properties:
@@ -68,8 +61,8 @@ resource_pools:
   network: default
   size: 1
   stemcell:
-    name: <%= stemcell_name %>
-    version: <%= stemcell_version %>
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
 
 compilation:
   cloud_properties:
