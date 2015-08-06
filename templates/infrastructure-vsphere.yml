@@ -1,0 +1,52 @@
+meta:
+  environment: (( merge ))
+  persistent_disk: 4096
+
+  stemcell:
+    name: bosh-stemcell-3016-vsphere-esxi-ubuntu-trusty-go_agent
+    version: latest
+
+jobs:
+  - name: graphite
+    templates:
+    - name: carbon
+      release: graphite
+    - name: graphite-web
+      release: graphite
+    - name: statsd
+      release: graphite
+    instances: 1
+    resource_pool: Monitoring-Core/StatsD
+    persistent_disk: (( meta.persistent_disk ))
+    networks:
+    - name: default
+      static_ips:
+      - 10.65.248.181
+
+compilation:
+  cloud_properties:
+
+resource_pools:
+  - name: vms
+    cloud_properties:
+      cpu: 2
+      ram: 4_096
+      disk: 20_000
+
+networks:
+- name: default
+  subnets:
+  - range: 10.65.248.0/24
+    gateway: 10.65.248.1
+    dns:
+    - 10.65.248.10
+    static:
+    - 10.65.248.181
+    - 10.65.248.182
+    - 10.65.248.183
+    - 10.65.248.184
+    reserved:
+    - 10.65.248.2-10.65.248.179
+    - 10.65.248.190-10.65.248.254
+    cloud_properties:
+      name: dvpg-pez-mgmt-VLAN-1041
