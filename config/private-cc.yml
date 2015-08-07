@@ -1,0 +1,6 @@
+---
+blobstore:
+  s3:
+    bucket_name: graphite-statsd-boshrelease
+    access_key_id: AKIAJPXVNZNNMAUV2BHQ
+    secret_access_key: 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
