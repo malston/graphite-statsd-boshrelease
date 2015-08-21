@@ -43,7 +43,7 @@ properties:
         xFilesFactor: "0.1"
         aggregationMethod: "max"
   graphite-web:
-    time_zone: America/San Francisco
+    time_zone: America/Los_Angeles
     httpd:
       port: 80
     wsgi:
