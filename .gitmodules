@@ -1,0 +1,3 @@
+[submodule "src/watchman"]
+	path = src/watchman
+	url = https://github.com/malston/watchman.git
