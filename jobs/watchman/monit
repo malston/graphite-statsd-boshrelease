@@ -1,0 +1,5 @@
+check process watchman
+  with pidfile /var/vcap/sys/run/watchman/watchman.pid
+  start program "/var/vcap/jobs/watchman/bin/monit_debugger watchman_ctl '/var/vcap/jobs/watchman/bin/watchman_ctl start'"
+  stop program "/var/vcap/jobs/watchman/bin/monit_debugger watchman_ctl '/var/vcap/jobs/watchman/bin/watchman_ctl stop'"
+  group vcap

@@ -33,7 +33,6 @@ templates:
   config/graphite-vhost.conf.erb: conf/graphite-vhost.conf
 
 properties:
-
   graphite-web.secret_key:
     description: Set this to a long, random unique string to use as a secret key for this install.
     default: THECAKEISALIE

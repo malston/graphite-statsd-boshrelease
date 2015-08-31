@@ -1,0 +1,50 @@
+meta:
+  environment: ~
+
+update:
+  canaries: 1
+  max_in_flight: 50
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+  serial: false
+
+jobs:
+  - name: graphite
+    templates:
+    - name: carbon
+      release: graphite
+    - name: graphite-web
+      release: graphite
+    - name: statsd
+      release: graphite
+    instances: 1
+    resource_pool: Monitoring-Core/StatsD
+    persistent_disk: 20480
+    networks: (( merge ))
+
+networks: (( merge ))
+
+properties:
+  carbon:
+    storage_schemas:
+      - name: "my_storage_schema"
+        pattern: "^my\\.metrics\\.*" # NB: Note the double escapes - this will evaluate to "^my\.metrics\.*"
+        retentions: "60s:1d"
+      - name: "my_storage_schema_2"
+        pattern: "metrics$"
+        retentions: "15s:7d,1m:21d,15m:5y"
+    storage_aggregations:
+      - name: "my_storage_aggregation"
+        pattern: "^my\\.metrics\\.*" # NB: Note the double escapes - this will evaluate to "^my\.metrics\.*"
+        xFilesFactor: "0.5"
+        aggregationMethod: "average"
+      - name: "my_storage_aggregation_2"
+        pattern: "metrics$"
+        xFilesFactor: "0.1"
+        aggregationMethod: "max"
+  graphite-web:
+    time_zone: America/Los_Angeles
+    httpd:
+      port: 80
+    wsgi:
+      inactivity-timeout: 60

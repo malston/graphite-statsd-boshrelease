@@ -1,0 +1,7 @@
+---
+name: grafana
+
+dependencies: {}
+
+files:
+  - grafana/grafana-2.1.3.linux-x64.tar.gz

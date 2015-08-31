@@ -1,0 +1,36 @@
+---
+name: watchman
+
+packages:
+- watchman
+
+templates:
+  bin/watchman_ctl: bin/watchman_ctl
+  bin/monit_debugger: bin/monit_debugger
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+
+properties:
+  watchman.statsd_address:
+    description: IP and port to the statsd endpoint.
+  watchman.statsd_prefix:
+    description: The prefix to use for statsd metrics.
+
+  cloudfoundry.doppler_endpoint:
+    description: "The CF Doppler endpoint, eg: wss://doppler.10.244.0.34.xip.io:443"
+  cloudfoundry.uaa_endpoint:
+    description: "The CF UAA endpoint, eg: https://uaa.10.244.0.34.xip.io"
+  cloudfoundry.skip_ssl_validation:
+    description: "Set to true to skip SSL validation when connecting to CF (defaults to false)"
+    default: false
+  cloudfoundry.firehose_client_id:
+    description: "CF UAA OAuth client ID with 'doppler.firehose' permissions"
+  cloudfoundry.firehose_client_secret:
+    description: "CF UAA OAuth client secret of client with 'doppler.firehose' permissions"
+  cloudfoundry.firehose_port:
+    description: "The Elastic Runtime API doppler port, defaults to 443"
+    default: 443
+  cloudfoundry.firehose_subscription_id:
+    description: "Subscription id to give to doppler to identify a unique consumer"
+    default: "watchman"
