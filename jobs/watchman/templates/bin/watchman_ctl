@@ -20,8 +20,8 @@ case $1 in
     CLIENT_SECRET="<%= p("cloudfoundry.firehose_client_secret") %>"
 
     exec chpst -u vcap:vcap watchman \
-        --domain=<%= p("cloudfoundry.system_domain") %> \
-        --doppler-port=<%= p("cloudfoundry.firehose_port") %> \
+        --doppler-endpoint=<%= p("cloudfoundry.doppler_endpoint") %> \
+        --uaa-endpoint=<%= p("cloudfoundry.uaa_endpoint") %> \
         <% if p("cloudfoundry.skip_ssl_validation") %>--skip-ssl-validation <% end %> \
         --client-id=$CLIENT_ID \
         --client-secret=$CLIENT_SECRET \
