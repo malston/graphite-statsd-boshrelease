@@ -17,6 +17,9 @@ case $1 in
     # store pid in $PIDFILE
     echo $$ > $PIDFILE
 
+    cd /var/vcap/packages/grafana
+    chown -RH vcap data/
+
     exec chpst -u vcap:vcap grafana-server web \
          >>$LOG_DIR/$JOB_NAME.stdout.log \
          2>>$LOG_DIR/$JOB_NAME.stderr.log
