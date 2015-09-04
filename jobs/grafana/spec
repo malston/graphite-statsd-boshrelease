@@ -5,7 +5,12 @@ packages:
   - grafana
 
 templates:
-  bin/grafana_ctl: bin/grafana_ctl
+  bin/grafana_ctl.erb: bin/grafana_ctl
+  config/custom.ini.erb: conf/custom.ini
+  config/defaults.ini: conf/defaults.ini
+  config/plugin.json.erb: conf/plugin.json
+  dashboards/PCF PEZ HTTP Firehose Metrics.json: dashboards/PCF PEZ HTTP Firehose Metrics.json
+  dashboards/PCF PEZ Ops Firehose Metrics.json: dashboards/PCF PEZ Ops Firehose Metrics.json
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
@@ -14,3 +19,6 @@ properties:
   grafana.port:
     description: The server listen port.
     default: 3000
+  grafana.db.engine:
+    description: The database engine to use. Choose from either 'sqlite3' or ???.
+    default: sqlite3

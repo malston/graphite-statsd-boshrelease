@@ -17,11 +17,19 @@ case $1 in
     # store pid in $PIDFILE
     echo $$ > $PIDFILE
 
-    cd /var/vcap/packages/grafana
-    mkdir -p data/log
-    chown -RH vcap data/
+    # Copy templated files to the correct locations
+    cp  -u /var/vcap/jobs/grafana/conf/defaults.ini /var/vcap/packages/grafana/conf/defaults.ini
+    cp  -u /var/vcap/jobs/grafana/conf/custom.ini /var/vcap/packages/grafana/conf/custom.ini
+    cp -au /var/vcap/jobs/grafana/dashboards /var/vcap/packages/grafana/dashboards
 
-    exec chpst -u vcap:vcap bin/grafana-server web \
+    <% if p('grafana.db.engine') == 'sqlite3' %>
+    touch /var/vcap/store/grafana/grafana.db
+    chown vcap:vcap /var/vcap/store/grafana/grafana.db
+    <% end %>
+
+    cd /var/vcap/packages/grafana
+
+    exec chpst -u vcap:vcap bin/grafana-server  \
          >>$LOG_DIR/$JOB_NAME.stdout.log \
          2>>$LOG_DIR/$JOB_NAME.stderr.log
 
