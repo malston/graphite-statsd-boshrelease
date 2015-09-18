@@ -1,3 +1,6 @@
 [submodule "src/watchman"]
 	path = src/watchman
 	url = https://github.com/malston/watchman.git
+[submodule "src/collector"]
+	path = src/collector
+	url = https://github.com/cloudfoundry/collector.git
